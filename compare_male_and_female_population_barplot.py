@@ -40,5 +40,5 @@ ax.set_ylabel('Voltage (mV)')
 ax.set_ylim([-59, 0])
 
 plt.tight_layout()
-plt.savefig('change_in_RMP.png', dpi=300)
+plt.savefig('compare_male_and_female_population_barplot.png', dpi=300)
 plt.show()
