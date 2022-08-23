@@ -4,6 +4,7 @@ from scipy.integrate.odepack import odeint
 from chondrocyte import Voltage_clamp
 import functions
 from params import params_dict
+import os
 
 # Configs
 num_trials = 100
@@ -61,10 +62,10 @@ while trials_completed < num_trials:
               np.random.lognormal(mean=np.log(params_dict['gBK']), sigma=sigma)]
 
     # Check if I_NaK_scale is within specified scale
-    # I_NaK_scale_limits = [0.1, 0.13]
-    # while not I_NaK_scale_limits[0] <= scales[1] <= I_NaK_scale_limits[1]:
-    #     scales[1] = np.random.lognormal(mean=np.log(np.mean(I_NaK_scale_limits)), sigma=sigma)
-    scales[1] = 0.2
+    I_NaK_scale_limits = [0.1, 0.5]
+    while not I_NaK_scale_limits[0] <= scales[1] <= I_NaK_scale_limits[1]:
+        scales[1] = np.random.lognormal(mean=np.log(np.mean(I_NaK_scale_limits)), sigma=sigma)
+    # scales[1] = 0.2
 
     V_0 = params_dict['V_0']
     Na_i_0 = params_dict['Na_i_0']
@@ -94,7 +95,7 @@ while trials_completed < num_trials:
     params_dict['sigma'], params_dict['I_K_2pore_scale'], params_dict['I_Na_b_scale'], params_dict['g_K_b_bar'], \
     params_dict['g_Cl_b_bar'], params_dict['gBK'] = scales
 
-    params_dict['I_NaK_bar'] = params_dict['I_NaK_scale'] * 70.8253 * params_dict['C_m'] / params_dict['C_myo']
+    params_dict['C_myo'] = 21.56
 
     if OA:
         params_dict['Q_10'] = 1.3
@@ -106,15 +107,13 @@ while trials_completed < num_trials:
         params_dict['g_K_DR'] *= 8.3
         params_dict['Q_10'] *= 3 / 1.3
 
+        params_dict['C_myo'] = 37.93
+
     if female:
         # Female (Epi)
         params_dict['g_K_DR'] *= 0.96 / 1.20
         params_dict['NCX_scale'] *= 1.07 / 1.10
-        params_dict['I_NaK_bar'] *= 0.87 / 0.92
-        params_dict['g_K_b_bar'] *= 0.42 / 0.82
 
-        # Female (Endo)
-        # params_dict['g_K_DR'] *= 0.87 / 1.10
         # params_dict['NCX_scale'] *= 0.99 / 1.01
         # params_dict['I_NaK_bar'] *= 1 / 1
         # params_dict['g_K_b_bar'] *= 0.68 / 1.25
@@ -126,6 +125,8 @@ while trials_completed < num_trials:
         # params_dict['g_K_b_bar'] *= 0.68 / 1.25
 
     # params_dict['H_o'] *= 10 ** (-6) / 10 ** (-7.4)
+
+    params_dict['I_NaK_bar'] = params_dict['I_NaK_scale'] * 70.8253 * params_dict['C_m'] / params_dict['C_myo']
 
     # Generate ICs for each model in the population
     y0 = (V_0, Na_i_0, K_i_0, Ca_i_0, H_i_0, Cl_i_0, a_ur_0, i_ur_0, vol_i_0, cal_0)
@@ -201,6 +202,6 @@ figure_name += str(t_final) + 's_'
 figure_name += str(round(mean_V_ss, 2)) + 'mean_'
 figure_name += str(round(std_V_ss, 2)) + 'std'
 
-plt.savefig(figure_name + '.png', dpi=300)
+plt.savefig(os.path.join('figures_INak_0.1_0.5', figure_name + '.png'), dpi=300)
 print('Figure saved as:', figure_name + '.png')
 # plt.show()

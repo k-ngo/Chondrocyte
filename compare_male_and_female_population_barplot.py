@@ -1,22 +1,22 @@
 import matplotlib.pyplot as plt
 
-mean_validation_control = -36.48  # -21.2
-mean_validation_OA = -36.48 * -23 / -21.2  #  -23
+mean_validation_control = -54.79  # -21.2
+mean_validation_OA = -54.79 * -23 / -21.2  #  -23
 
 std_validation_control = 0.923
 std_validation_OA = 0.837
 
-mean_male_control = -36.48
-std_male_control = 2.78
+mean_male_control = -54.79
+std_male_control = 6.52
 
-mean_male_OA = -41.39
-std_male_OA = 1.14
+mean_male_OA = -69.75
+std_male_OA = 4.20
 
-mean_female_control = -30.26
-std_female_control = 5.42
+mean_female_control = -53.12
+std_female_control = 7.41
 
-mean_female_OA = -40.01
-std_female_OA = 1.07
+mean_female_OA = -69.09
+std_female_OA = 5.61
 
 labels = ['Scaled Male\nExp. Validation', 'Male', 'Female']
 
@@ -30,15 +30,15 @@ width = 0.35  # the width of the bars
 
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(6, 4))
 
-ax.bar(x_loc, control, yerr=control_error, width=-1. * width, align='edge', color='slategray', label='Control')
+ax.bar(x_loc, control, yerr=control_error, width=-1 * width, align='edge', color='slategray', label='Control')
 ax.bar(x_loc, OA, yerr=OA_error, width=width, align='edge', color='tomato', label='OA')
 
 ax.legend(ncol=2)
 ax.set_xticks(x_loc, labels)
 ax.set_title('Resting Membrane Potential in Control vs. OA')
 ax.set_ylabel('Voltage (mV)')
-ax.set_ylim([-59, 0])
+ax.set_ylim([-89, 0])
 
 plt.tight_layout()
-plt.savefig('compare_male_and_female_population_barplot.png', dpi=300)
+plt.savefig('change_in_RMP.png', dpi=300)
 plt.show()
