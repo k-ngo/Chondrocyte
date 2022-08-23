@@ -11,7 +11,7 @@ num_trials = 100
 sigma = 0.15  # Standard deviation for each parameter
 t_final = 50000  # params_dict['t_final']  # 50000 ms
 dt = 0.1  # params_dict['dt']
-OA = False
+OA = True
 female = True
 figure_name = ''
 t = np.linspace(0, t_final, int(t_final / dt))
@@ -95,7 +95,7 @@ while trials_completed < num_trials:
     params_dict['sigma'], params_dict['I_K_2pore_scale'], params_dict['I_Na_b_scale'], params_dict['g_K_b_bar'], \
     params_dict['g_Cl_b_bar'], params_dict['gBK'] = scales
 
-    params_dict['C_myo'] = 21.56
+    params_dict['C_m'] = 21.56
 
     if OA:
         params_dict['Q_10'] = 1.3
@@ -107,7 +107,7 @@ while trials_completed < num_trials:
         params_dict['g_K_DR'] *= 8.3
         params_dict['Q_10'] *= 3 / 1.3
 
-        params_dict['C_myo'] = 37.93
+        params_dict['C_m'] = 37.93
 
     if female:
         # Female (Epi)
@@ -126,6 +126,7 @@ while trials_completed < num_trials:
 
     # params_dict['H_o'] *= 10 ** (-6) / 10 ** (-7.4)
 
+    params_dict['NCX_scale'] = params_dict['C_m'] / params_dict['C_myo']
     params_dict['I_NaK_bar'] = params_dict['I_NaK_scale'] * 70.8253 * params_dict['C_m'] / params_dict['C_myo']
 
     # Generate ICs for each model in the population
