@@ -1,5 +1,10 @@
 ![Screenshot](figures/potato.jpg)
 
+# Instruction
+
+1. Open generate_population.py, edit configs then run 
+2. Open desired analysis script, edit configs then run
+
 # Example outputs
 
 **sensitivity_analysis.py**
