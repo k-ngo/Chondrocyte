@@ -7,7 +7,7 @@ from params import params_dict
 import os
 
 # Configs
-t_final = 100000  # params_dict['t_final']  # 50000 ms
+t_final = 50000  # params_dict['t_final']  # 50000 ms
 dt = 0.1  # params_dict['dt']
 figure_name = os.path.join('figures', 'male_vs_female_OA.png')
 t = np.linspace(0, t_final, int(t_final / dt))

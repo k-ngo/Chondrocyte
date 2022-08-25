@@ -8,18 +8,18 @@ import os
 import glob
 
 # Configs
-num_trials = 10
+num_trials = 100
 sigma = 0.15  # Standard deviation for each parameter
 t_final = 50000  # params_dict['t_final']  # 50000 ms
 dt = 0.1  # params_dict['dt']
 OA = False
-female = True
-output_folder = 'female'
+female = False
+output_folder = 'male'
 output_name = ''
 t = np.linspace(0, t_final, int(t_final / dt))
 
 # Advanced configs
-stride = 10  # when saving data, skip this many data points to speed up saving and free up memory usage
+stride = 100  # when saving data, skip this many data points to speed up saving and free up memory usage
 
 # Initialize arrays and location for storage
 if not os.path.exists(output_folder):
@@ -87,7 +87,7 @@ while trials_completed < num_trials:
                   np.random.lognormal(mean=np.log(params_dict['gBK']), sigma=sigma)]
 
     # Change current scaling values/conductance to perturbed values
-    params_dict['g_K_DR'], params_dict['I_NaK_scale'], params_dict['NCX_scale'], params_dict['I_Ca_ATP_scale'], \
+    params_dict['g_K_DR'], params_dict['I_NaK_bar'], params_dict['NCX_scale'], params_dict['I_Ca_ATP_scale'], \
     params_dict['sigma'], params_dict['I_K_2pore_scale'], params_dict['I_Na_b_scale'], params_dict['g_K_b_bar'], \
     params_dict['g_Cl_b_bar'], params_dict['gBK'] = new_scales
 

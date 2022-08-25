@@ -12,19 +12,19 @@ import re
 
 # Configs
 dt = 0.1  # params_dict['dt']
-female = False
-control_input_folder = 'male'
-OA_input_folder = 'male_OA'
-figure_name = os.path.join('figures', 'sensitivity_analysis')
+female = True
+control_input_folder = 'female'
+OA_input_folder = 'female_OA'
+figure_name = os.path.join('figures', 'female_sensitivity_analysis')
 
 # Load datasets
-control_detected_files = glob.glob(os.path.join(control_input_folder, '*.npy'))
-control_all_voltage_and_ion_ss = np.load(control_detected_files[2])
-control_all_parameters = np.load(control_detected_files[3])
+control_detected_files = sorted(glob.glob(os.path.join(control_input_folder, '*.npy')))
+control_all_parameters = np.load(control_detected_files[1])
+control_all_voltage_and_ion_ss = np.load(control_detected_files[3])
 
-OA_detected_files = glob.glob(os.path.join(OA_input_folder, '*.npy'))
-OA_all_voltage_and_ion_ss = np.load(OA_detected_files[2])
-OA_all_parameters = np.load(OA_detected_files[3])
+OA_detected_files = sorted(glob.glob(os.path.join(OA_input_folder, '*.npy')))
+OA_all_parameters = np.load(OA_detected_files[1])
+OA_all_voltage_and_ion_ss = np.load(OA_detected_files[3])
 
 # Get simulation time from file name
 num_trials = int(re.search('%s(.*)%s' % ('__', 'trials_'), control_detected_files[0]).group(1))
@@ -52,14 +52,14 @@ OA_outputs = np.array([OA_all_voltage_and_ion_ss[:, 0],
 # WT population
 X = control_all_parameters  # predictor variables
 Y = control_outputs.T  # response variable
-pls2 = PLSRegression(n_components=2, max_iter=1000)
+pls2 = PLSRegression(n_components=2, max_iter=10000)
 pls2.fit(X, Y)
 cdf = pls2.coef_.T
 # print(X, Y, sep='\n\n', end='\n\n')
 # Diseased population
 X = OA_all_parameters  # predictor variables
 Y = OA_outputs.T  # response variable
-OA_pls2 = PLSRegression(n_components=2, max_iter=1000)
+OA_pls2 = PLSRegression(n_components=2, max_iter=10000)
 OA_pls2.fit(X, Y)
 OA_cdf = OA_pls2.coef_.T
 # print(X, Y, sep='\n\n', end='\n\n')
@@ -94,13 +94,13 @@ for i, ax in zip(range(len(output_names)), axes.flatten()):
 
     # Set y-axis limits
     if output_names[i] == '$V_m$':
-        ax.set_ylim([-4.1, 4.4])
+        ax.set_ylim([-3.2, 4.4])
     elif output_names[i] == '$[Na^{+}]_i$':
-        ax.set_ylim([-14, 16])
+        ax.set_ylim([-11, 14])
     elif output_names[i] == '$[K^{+}]_i$':
-        ax.set_ylim([-16, 12])
+        ax.set_ylim([-14, 12])
     elif output_names[i] == '$[Ca^{2+}]_i$':
-        ax.set_ylim([-0.0009, 0.00065])
+        ax.set_ylim([-0.0009, 0.0010])
 
     ax.legend()
     ax.set_xticks(x_loc, current_labels)

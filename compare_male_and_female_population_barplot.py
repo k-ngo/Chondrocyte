@@ -1,22 +1,22 @@
 import matplotlib.pyplot as plt
 
-mean_validation_control = -71.24  # -21.2
-mean_validation_OA = -71.24 * -23 / -21.2  # -23
+mean_validation_control = -69.11  # -21.2
+mean_validation_OA = -69.11 * -26 / -39  # -23
 
-std_validation_control = 0.923
-std_validation_OA = 0.837
+std_validation_control = 4
+std_validation_OA = 4
 
-mean_male_control = -71.24
-std_male_control = 4.9
+mean_male_control = -69.11
+std_male_control = 4.71
 
-mean_male_OA = -75.57
-std_male_OA = 3.52
+mean_male_OA = -53.87
+std_male_OA = 3.21
 
-mean_female_control = -71.17
-std_female_control = 3.78
+mean_female_control = -58.21
+std_female_control = 5.75
 
-mean_female_OA = -74.4
-std_female_OA = 4.73
+mean_female_OA = -49.03
+std_female_OA = 1.34
 
 labels = ['Scaled Male\nExp. Validation', 'Male', 'Female']
 
@@ -30,8 +30,8 @@ width = 0.35  # the width of the bars
 
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(6, 4))
 
-ax.bar(x_loc, control, yerr=control_error, width=-1 * width, align='edge', color='slategray', label='Control')
-ax.bar(x_loc, OA, yerr=OA_error, width=width, align='edge', color='tomato', label='OA')
+ax.bar(x_loc, control, yerr=control_error, width=-1 * width, align='edge', color='slategray', linewidth=0.5, edgecolor='k', label='Control')
+ax.bar(x_loc, OA, yerr=OA_error, width=width, align='edge', color='tomato', linewidth=0.5, edgecolor='k', label='OA')
 
 ax.legend(ncol=2)
 ax.set_xticks(x_loc, labels)
@@ -40,5 +40,5 @@ ax.set_ylabel('Voltage (mV)')
 ax.set_ylim([-89, 0])
 
 plt.tight_layout()
-plt.savefig('change_in_RMP.png', dpi=300)
+plt.savefig('figures/change_in_RMP.png', dpi=300)
 plt.show()
