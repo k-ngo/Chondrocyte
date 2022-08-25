@@ -1,4 +1,4 @@
-![Screenshot](figures/potatoes.jpg)
+![Screenshot](figures/potato.jpg)
 
 # Example outputs
 
