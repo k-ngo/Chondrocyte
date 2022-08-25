@@ -35,8 +35,8 @@ params_dict = dict(
   Cl_o   = 140.0,                 # Clamped external chloride concentration (mM/l)
   # Initial conditions
   V_0 = -66.725,                  # Initial membrane potential (mV)
-  Na_i_0  =  25.0,                # CHANGED Initial internal sodium concentration (mM/l), 8.5 for cardiac; 40??? for chondrocyte - using either 12.0 or 20.0
-  Na_i_clamp = 25.0,              # CHANGED
+  Na_i_0  =  25.0,                # Initial internal sodium concentration (mM/l), 8.5 for cardiac; 40??? for chondrocyte - using either 12.0 or 20.0
+  Na_i_clamp = 25.0,
   K_i_0 = 180.0,                  # Initial internal potassium concentration (mM/l), 120-140 for cardiac; 120-140 for chondrocyte
   Ca_i_0 = 0.00001,               # Initial internal calcium concentration (mM/l), 0.000067 mM/l for cardiac, 0.00001 - 0.00005 for chondrocyte
   H_i_0   = 3.47426156721507e-10, # Initial internal hydrogen concentration (mM/l)

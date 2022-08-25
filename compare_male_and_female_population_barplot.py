@@ -1,22 +1,22 @@
 import matplotlib.pyplot as plt
 
-mean_validation_control = -43.85  # -21.2
-mean_validation_OA = -43.85 * -23 / -21.2  # -23
+mean_validation_control = -71.24  # -21.2
+mean_validation_OA = -71.24 * -23 / -21.2  # -23
 
 std_validation_control = 0.923
 std_validation_OA = 0.837
 
-mean_male_control = -43.85
-std_male_control = 3.15
+mean_male_control = -71.24
+std_male_control = 4.9
 
-mean_male_OA = -45.64
-std_male_OA = 1.22
+mean_male_OA = -75.57
+std_male_OA = 3.52
 
-mean_female_control = -42.48
-std_female_control = 3.42
+mean_female_control = -71.17
+std_female_control = 3.78
 
-mean_female_OA = -44.51
-std_female_OA = 1.25
+mean_female_OA = -74.4
+std_female_OA = 4.73
 
 labels = ['Scaled Male\nExp. Validation', 'Male', 'Female']
 
@@ -37,7 +37,7 @@ ax.legend(ncol=2)
 ax.set_xticks(x_loc, labels)
 ax.set_title('Resting Membrane Potential in Control vs. OA')
 ax.set_ylabel('Voltage (mV)')
-ax.set_ylim([-59, 0])
+ax.set_ylim([-89, 0])
 
 plt.tight_layout()
 plt.savefig('change_in_RMP.png', dpi=300)
